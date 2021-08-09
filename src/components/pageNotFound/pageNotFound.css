@@ -1,0 +1,104 @@
+.main-container {
+  height: 100vh;
+  position: relative;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--light-black);
+  background: url('../../images/sad-pikapika.jpeg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+.sorry-title {
+  font-size: 2.5rem;
+  margin: 0;
+  margin-bottom: 14rem;
+}
+
+.page-not-found {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.back-button {
+  margin-top: 5rem;
+  padding: 1rem;
+  cursor: pointer;
+  color: var(--black);
+  font-weight: 600;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--gray);
+  border-radius: 0.8rem;
+  background: var(--navbar);
+}
+
+.sad-pokemon-img {
+  position: absolute;
+  width: 6rem;
+  left: 2rem;
+  bottom: 2rem;
+}
+
+@media (min-width: 550px) {
+  .sorry-title {
+    font-size: 3rem;
+  }
+
+  .not-found-number {
+    font-size: 15rem;
+  }
+
+  .not-found-img {
+    width: 11rem;
+  }
+
+  .page-not-found {
+    font-size: 2rem;
+    margin: 0;
+  }
+
+  .sad-pokemon-img {
+    width: 8rem;
+  }
+
+  .back-button {
+    padding: 1rem 2rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .sorry-title {
+    font-size: 3.5rem;
+  }
+
+  .not-found-number {
+    font-size: 20rem;
+  }
+
+  .not-found-img {
+    width: 16rem;
+  }
+
+  .page-not-found {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+
+  .sad-pokemon-img {
+    width: 10rem;
+  }
+
+  .back-button {
+    padding: 1rem 3rem;
+  }
+}

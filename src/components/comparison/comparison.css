@@ -1,0 +1,116 @@
+.modal-container {
+  position: fixed;
+  width: 100vw;
+  height: 100%;
+  margin: 0;
+  background: var(--shadow-bg);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.card {
+  width: 90%;
+  max-width: 700px;
+  margin: 5rem auto;
+  background: var(--white);
+  border-radius: 1rem;
+  cursor: auto;
+  padding-bottom: 20px;
+}
+
+.pokemon-card__title {
+  display: flex;
+  padding-top: 1rem;
+}
+
+.pokemon-container {
+  margin: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--card-color);
+  border-radius: 1rem;
+  padding-bottom: 10px;
+}
+
+.comparison-image-container {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  image-rendering: pixelated;
+}
+
+.comparison-pokemon-img {
+  width: 10rem;
+}
+
+.pokemon-name {
+  margin: 0;
+  margin-top: 1em;
+  text-align: center;
+  color: var(--light-black);
+}
+
+.information-container {
+  display: flex;
+  width: 80%;
+  text-align: center;
+  margin-top: 1rem;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+
+.information-container__item {
+  margin: 0;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.information-container__item-value,
+.information-container__item-name {
+  font-size: 1rem;
+  color: var(--light-black);
+  font-weight: 500;
+  margin: 0.5rem;
+}
+.information-container__item-name {
+  text-transform: uppercase;
+}
+.information-container__item-value {
+  color: var(--black);
+}
+
+.pokemon-container__title {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemon-container__title-text {
+  color: var(--light-black);
+  margin: 0;
+}
+
+.abilities-container {
+  margin-top: 1rem;
+  display: flex;
+}
+.abilities-list-compare {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  list-style: none;
+  margin: 1em;
+}
+
+.abilities-item {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.pokemon-text {
+  margin: 0;
+  color: var(--card-color);
+}

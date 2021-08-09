@@ -1,0 +1,9 @@
+.graph {
+  width: 400px;
+}
+
+@media screen and (max-width: 576px) {
+  .graph {
+    width: 320px;
+  }
+}
