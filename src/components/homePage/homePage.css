@@ -1,6 +1,6 @@
 .home-page-container {
   position: relative;
-  background: url('../../images/pika-bg.gif');
+  background: url('../../images/pikaBg.gif');
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -38,7 +38,7 @@
 .home-button {
   text-decoration: none;
   color: var(--white);
-  background: url('../../images/pokeball-gif.gif');
+  background: url('../../images/pokeballGif.gif');
   background-position: center;
   background-repeat: no-repeat;
   width: 260px;
@@ -50,7 +50,7 @@
 
 .home-button:hover {
   color: var(--redish);
-  background: url('../../images/pokeball-gif.gif');
+  background: url('../../images/pokeballGif.gif');
   background-position: center;
   background-repeat: no-repeat;
 }

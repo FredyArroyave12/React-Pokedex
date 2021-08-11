@@ -57,29 +57,25 @@ const PokemonList = (props) => {
         hasMore={true}
       >
         <ul className="pokemon__items">
-          {props.pokemonData.pokemons
-            .filter((item) => item.name.includes(props.navBar.searchContent))
-            .map((pokemon) => {
-              const index = props.pokemonData.pokemons.indexOf(pokemon);
-              return (
-                <li
-                  className="pokemon__item"
-                  key={index}
-                  onClick={() => fetchPokemon(index)}
-                >
-                  <img
-                    loading="lazy"
-                    className="pokemon__item-img"
-                    src={utils.SPRITES_URL + (index + 1) + '.png'}
-                    alt={pokemon.name}
-                  />
-                  <h3 className="pokemon__item-name">
-                    {pokemon.name.charAt(0).toUpperCase() +
-                      pokemon.name.slice(1)}
-                  </h3>
-                </li>
-              );
-            })}
+          {props.pokemonData.pokemons.map((pokemon) => {
+            const index = props.pokemonData.pokemons.indexOf(pokemon);
+            return (
+              <li
+                className="pokemon__item"
+                key={index}
+                onClick={() => fetchPokemon(index)}
+              >
+                <img
+                  className="pokemon__item-img"
+                  src={utils.SPRITES_URL + (index + 1) + '.png'}
+                  alt={pokemon.name}
+                />
+                <h3 className="pokemon__item-name">
+                  {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+                </h3>
+              </li>
+            );
+          })}
         </ul>
       </InfiniteScroll>
     </div>
