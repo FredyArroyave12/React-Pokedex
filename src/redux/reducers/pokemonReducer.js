@@ -23,10 +23,16 @@ const initialState = {
 const pokemonReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_SEARCH:
+      let list = state.searchPokemon;
+      const pokemonSearch = list.filter((item) =>
+        item.name.toLowerCase().includes(state.searchContent.toLowerCase())
+      );
       return {
         ...state,
         ...action.payload,
+        pokemons: pokemonSearch,
       };
+
     case actionTypes.MODIFY_MOBILE:
       return {
         ...state,
@@ -77,12 +83,6 @@ const pokemonReducer = (state = initialState, action) => {
           state.pokemons[action.payload.index].dataLoaded &&
           state.pokemons[action.payload.index].speciesLoaded,
       };
-    case actionTypes.SEARCH_TEXT:
-      let list = state.searchPokemon;
-      const pokemonSearch = list.filter((item) =>
-        item.name.toLowerCase().includes(state.searchContent.toLowerCase())
-      );
-      return { ...state, pokemonSearch };
 
     case actionTypes.POKEMON_ERROR:
       return {

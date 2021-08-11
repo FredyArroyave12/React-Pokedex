@@ -4,6 +4,7 @@ import icon from '../../images/pokedex.png';
 import { connect } from 'react-redux';
 import {
   updateSearch,
+  searchText,
   changeMobileItemsStatus,
 } from '../../redux/actions/pokemonActions';
 import './navBar.css';

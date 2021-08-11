@@ -33,6 +33,9 @@ export const updateSearch = (searchContent) => {
     },
   };
 };
+export const searchText = () => ({
+  type: actionTypes.SEARCH_TEXT,
+});
 export const fetchPokemonList =
   (url = utils.API_URL + '/pokemon') =>
   (dispatch) => {
@@ -168,10 +171,6 @@ export const selectPokemon = (index) => {
 
 export const updatePokemonModalActive = () => ({
   type: actionTypes.MODAL_ACTIVE,
-});
-
-export const searchText = () => ({
-  type: actionTypes.SEARCH_TEXT,
 });
 
 export const updateComparing = () => ({
