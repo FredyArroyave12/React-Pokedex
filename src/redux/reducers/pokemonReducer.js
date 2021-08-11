@@ -17,27 +17,23 @@ const initialState = {
   error: null,
   searchPokemon: [],
   searchContent: '',
-  isMobileItemsActive: false,
 };
 
 const pokemonReducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.UPDATE_SEARCH:
-      let list = state.searchPokemon;
-      const pokemonSearch = list.filter((item) =>
-        item.name.toLowerCase().includes(state.searchContent.toLowerCase())
-      );
       return {
         ...state,
-        ...action.payload,
-        pokemons: pokemonSearch,
+        searchContent: action.payload.searchContent,
+        isFetching: true,
+        isFetchingPokemon: true,
+        pokemons: action.payload.searchPokemons.filter((item) =>
+          item.name
+            .toLowerCase()
+            .includes(state.searchContent.toLocaleLowerCase())
+        ),
       };
 
-    case actionTypes.MODIFY_MOBILE:
-      return {
-        ...state,
-        isMobileItemsActive: !state.isMobileItemsActive,
-      };
     case actionTypes.POKEMON_LIST_REQUEST:
       return {
         ...state,
@@ -50,8 +46,8 @@ const pokemonReducer = (state = initialState, action) => {
         next: action.payload.next,
         previous: action.payload.previous,
         pokemons: [...state.pokemons, ...action.payload.pokemons],
-        isFetching: false,
         searchPokemon: [...state.pokemons, ...action.payload.pokemons],
+        isFetching: false,
       };
     case actionTypes.POKEMON_LIST_ERROR:
       return {

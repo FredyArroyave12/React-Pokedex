@@ -1,17 +1,11 @@
 import { actionTypes } from '../actions/navBarActions';
 
 const initialState = {
-  searchContent: '',
   isMobileItemsActive: false,
 };
 
 const navBarReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.UPDATE_SEARCH:
-      return {
-        ...state,
-        ...action.payload,
-      };
     case actionTypes.MODIFY_MOBILE:
       return {
         ...state,

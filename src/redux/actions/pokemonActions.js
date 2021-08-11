@@ -25,17 +25,17 @@ export const changeMobileItemsStatus = () => {
     type: actionTypes.MODIFY_MOBILE,
   };
 };
-export const updateSearch = (searchContent) => {
+
+export const updateSearch = (searchContent, searchPokemon) => {
   return {
     type: actionTypes.UPDATE_SEARCH,
     payload: {
       searchContent,
+      searchPokemons: searchPokemon,
     },
   };
 };
-export const searchText = () => ({
-  type: actionTypes.SEARCH_TEXT,
-});
+
 export const fetchPokemonList =
   (url = utils.API_URL + '/pokemon') =>
   (dispatch) => {

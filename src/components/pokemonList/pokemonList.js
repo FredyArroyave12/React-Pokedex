@@ -66,7 +66,6 @@ const PokemonList = (props) => {
                 onClick={() => fetchPokemon(index)}
               >
                 <img
-                  loading="lazy"
                   className="pokemon__item-img"
                   src={utils.SPRITES_URL + (index + 1) + '.png'}
                   alt={pokemon.name}
