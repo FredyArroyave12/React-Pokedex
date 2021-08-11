@@ -16,8 +16,23 @@ export const actionTypes = {
   UPDATE_LOAD_POKEMON: 'UPDATE_LOAD_POKEMON',
   UPDATE_COMPARING: 'UPDATE_COMPARING',
   COMPARISON_MODAL_ACTIVE: 'COMPARISON_MODAL_ACTIVE',
+  SEARCH_TEXT: 'SEARCH_TEXT',
+  UPDATE_SEARCH: 'UPDATE_SEARCH',
+  MODIFY_MOBILE: 'MODIFY_MOBILE',
 };
-
+export const changeMobileItemsStatus = () => {
+  return {
+    type: actionTypes.MODIFY_MOBILE,
+  };
+};
+export const updateSearch = (searchContent) => {
+  return {
+    type: actionTypes.UPDATE_SEARCH,
+    payload: {
+      searchContent,
+    },
+  };
+};
 export const fetchPokemonList =
   (url = utils.API_URL + '/pokemon') =>
   (dispatch) => {
@@ -153,6 +168,10 @@ export const selectPokemon = (index) => {
 
 export const updatePokemonModalActive = () => ({
   type: actionTypes.MODAL_ACTIVE,
+});
+
+export const searchText = () => ({
+  type: actionTypes.SEARCH_TEXT,
 });
 
 export const updateComparing = () => ({

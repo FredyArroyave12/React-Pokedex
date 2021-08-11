@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
   updateSearch,
   changeMobileItemsStatus,
-} from '../../redux/actions/navBarActions';
+} from '../../redux/actions/pokemonActions';
 import './navBar.css';
 
 const NavBar = (props) => {

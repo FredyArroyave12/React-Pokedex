@@ -1,4 +1,5 @@
 import { actionTypes } from '../actions/pokemonActions';
+
 import utils from '../../utils';
 
 const initialState = {
@@ -8,17 +9,29 @@ const initialState = {
   pokemons: [],
   isFetching: false,
   isFetchingPokemon: false,
-  firstPokemon: 0,
   secondPokemon: 0,
   isModalActive: false,
   isComparing: false,
   isComparisonActive: false,
   didLoadPokemons: false,
   error: null,
+  searchPokemon: [],
+  searchContent: '',
+  isMobileItemsActive: false,
 };
 
 const pokemonReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.UPDATE_SEARCH:
+      return {
+        ...state,
+        ...action.payload,
+      };
+    case actionTypes.MODIFY_MOBILE:
+      return {
+        ...state,
+        isMobileItemsActive: !state.isMobileItemsActive,
+      };
     case actionTypes.POKEMON_LIST_REQUEST:
       return {
         ...state,
@@ -32,6 +45,7 @@ const pokemonReducer = (state = initialState, action) => {
         previous: action.payload.previous,
         pokemons: [...state.pokemons, ...action.payload.pokemons],
         isFetching: false,
+        searchPokemon: [...state.pokemons, ...action.payload.pokemons],
       };
     case actionTypes.POKEMON_LIST_ERROR:
       return {
@@ -39,6 +53,7 @@ const pokemonReducer = (state = initialState, action) => {
         error: action.payload.error,
         isFetching: false,
       };
+
     case actionTypes.POKEMON_REQUEST:
       return {
         ...state,
@@ -49,6 +64,7 @@ const pokemonReducer = (state = initialState, action) => {
         ...action.payload.pokemon,
         dataLoaded: true,
       };
+
       return {
         ...state,
         isFetchingPokemon: false,
@@ -61,6 +77,13 @@ const pokemonReducer = (state = initialState, action) => {
           state.pokemons[action.payload.index].dataLoaded &&
           state.pokemons[action.payload.index].speciesLoaded,
       };
+    case actionTypes.SEARCH_TEXT:
+      let list = state.searchPokemon;
+      const pokemonSearch = list.filter((item) =>
+        item.name.toLowerCase().includes(state.searchContent.toLowerCase())
+      );
+      return { ...state, pokemonSearch };
+
     case actionTypes.POKEMON_ERROR:
       return {
         ...state,
