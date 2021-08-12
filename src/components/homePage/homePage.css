@@ -1,0 +1,74 @@
+.home-page-container {
+  position: relative;
+  background: url('../../images/pikaBg.gif');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+  width: auto;
+}
+
+.home-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  height: 50vh;
+  background: var(--light-white);
+  border-radius: 5rem;
+}
+
+.home-message-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.home-message {
+  font-size: 3.5rem;
+  text-align: center;
+  color: var(--white);
+}
+
+.home-button {
+  text-decoration: none;
+  color: var(--white);
+  background: url('../../images/pokeballGif.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 260px;
+  height: 250px;
+  margin-top: 2rem;
+  padding: 10rem 2rem;
+  border-radius: 1rem;
+}
+
+.home-button:hover {
+  color: var(--redish);
+  background: url('../../images/pokeballGif.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 900px) {
+  .home-card {
+    width: 70vw;
+    height: 50vh;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-card {
+    width: 80vw;
+    height: 50vh;
+  }
+
+  .home-message {
+    font-size: 3rem;
+  }
+}
