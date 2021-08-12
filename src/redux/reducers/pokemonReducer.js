@@ -1,5 +1,4 @@
 import { actionTypes } from '../actions/pokemonActions';
-
 import utils from '../../utils';
 
 const initialState = {
@@ -9,31 +8,17 @@ const initialState = {
   pokemons: [],
   isFetching: false,
   isFetchingPokemon: false,
+  firstPokemon: 0,
   secondPokemon: 0,
   isModalActive: false,
   isComparing: false,
   isComparisonActive: false,
   didLoadPokemons: false,
   error: null,
-  searchPokemon: [],
-  searchContent: '',
 };
 
 const pokemonReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.UPDATE_SEARCH:
-      return {
-        ...state,
-        searchContent: action.payload.searchContent,
-        isFetching: true,
-        isFetchingPokemon: true,
-        pokemons: action.payload.searchPokemons.filter((item) =>
-          item.name
-            .toLowerCase()
-            .includes(state.searchContent.toLocaleLowerCase())
-        ),
-      };
-
     case actionTypes.POKEMON_LIST_REQUEST:
       return {
         ...state,
@@ -46,7 +31,6 @@ const pokemonReducer = (state = initialState, action) => {
         next: action.payload.next,
         previous: action.payload.previous,
         pokemons: [...state.pokemons, ...action.payload.pokemons],
-        searchPokemon: [...state.pokemons, ...action.payload.pokemons],
         isFetching: false,
       };
     case actionTypes.POKEMON_LIST_ERROR:
@@ -55,7 +39,6 @@ const pokemonReducer = (state = initialState, action) => {
         error: action.payload.error,
         isFetching: false,
       };
-
     case actionTypes.POKEMON_REQUEST:
       return {
         ...state,
@@ -66,7 +49,6 @@ const pokemonReducer = (state = initialState, action) => {
         ...action.payload.pokemon,
         dataLoaded: true,
       };
-
       return {
         ...state,
         isFetchingPokemon: false,
@@ -79,7 +61,6 @@ const pokemonReducer = (state = initialState, action) => {
           state.pokemons[action.payload.index].dataLoaded &&
           state.pokemons[action.payload.index].speciesLoaded,
       };
-
     case actionTypes.POKEMON_ERROR:
       return {
         ...state,

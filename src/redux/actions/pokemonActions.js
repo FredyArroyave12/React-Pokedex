@@ -16,24 +16,6 @@ export const actionTypes = {
   UPDATE_LOAD_POKEMON: 'UPDATE_LOAD_POKEMON',
   UPDATE_COMPARING: 'UPDATE_COMPARING',
   COMPARISON_MODAL_ACTIVE: 'COMPARISON_MODAL_ACTIVE',
-  SEARCH_TEXT: 'SEARCH_TEXT',
-  UPDATE_SEARCH: 'UPDATE_SEARCH',
-  MODIFY_MOBILE: 'MODIFY_MOBILE',
-};
-export const changeMobileItemsStatus = () => {
-  return {
-    type: actionTypes.MODIFY_MOBILE,
-  };
-};
-
-export const updateSearch = (searchContent, searchPokemon) => {
-  return {
-    type: actionTypes.UPDATE_SEARCH,
-    payload: {
-      searchContent,
-      searchPokemons: searchPokemon,
-    },
-  };
 };
 
 export const fetchPokemonList =
