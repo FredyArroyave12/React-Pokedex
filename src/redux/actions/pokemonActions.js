@@ -76,8 +76,8 @@ export const fetchPokemon = (index) => (dispatch) => {
               id: data.id,
               name: data.name,
               information: {
-                height: data.height,
-                weight: data.weight,
+                height: data.height / 10,
+                weight: data.weight / 10,
               },
               abilities: data.abilities,
               stats: data.stats,
