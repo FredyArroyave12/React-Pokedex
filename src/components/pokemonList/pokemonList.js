@@ -42,7 +42,11 @@ const PokemonList = (props) => {
       <PokemonModal />
       <Comparison />
       {props.pokemonData.isComparing && (
-        <div className="comparison-pokemon">
+        <div
+          className={
+            props.pokemonData.isComparing ? 'comparison-pokemon' : 'hidden'
+          }
+        >
           <h2 className="comparison-name">
             Comparing:{' '}
             {props.pokemonData.pokemons[

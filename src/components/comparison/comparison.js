@@ -37,9 +37,10 @@ const Comparison = (props) => {
           <div className="modal-container" onClick={closeModal}>
             <div className="card" onClick={handleCardClick}>
               <div className="pokemon-card__title">
-                <button className="pokemon-card__close" onClick={closeModal}>
-                  X
-                </button>
+                <span
+                  class="close-icon far fa-times-circle"
+                  onClick={closeModal}
+                ></span>
               </div>
               <div className="pokemon-container">
                 <div>
@@ -63,15 +64,21 @@ const Comparison = (props) => {
                 <div className="information-container">
                   {Object.keys(pokemon.information).map((key, index) => (
                     <div className={informationClasses[index]}>
-                      <h3 className="information-container__item-value">
-                        {pokemon.information[key] + informationUnits[index]}
-                      </h3>
-                      <h3 className="information-container__item-name">
-                        {key}
-                      </h3>
-                      <h3 className="information-container__item-value">
-                        {pokemon2.information[key] + informationUnits[index]}
-                      </h3>
+                      <div className="left-content">
+                        <h3 className="information-container__item-value">
+                          {pokemon.information[key] + informationUnits[index]}
+                        </h3>
+                      </div>
+                      <div className="center-content">
+                        <h3 className="information-container__item-name">
+                          {key}
+                        </h3>
+                      </div>
+                      <div className="right-content">
+                        <h3 className="information-container__item-value">
+                          {pokemon2.information[key] + informationUnits[index]}
+                        </h3>
+                      </div>
                     </div>
                   ))}
                 </div>

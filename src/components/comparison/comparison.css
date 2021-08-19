@@ -24,7 +24,7 @@
 }
 
 .pokemon-container {
-  margin: 2rem 1.5rem;
+  margin: 1.5rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,17 +53,40 @@
 
 .information-container {
   display: flex;
+  flex-direction: column;
   width: 80%;
   text-align: center;
   margin-top: 1rem;
+
   justify-content: center;
-  padding-bottom: 0.5rem;
+  padding-bottom: 2rem;
 }
 
 .information-container__item {
-  margin: 0;
+  margin: auto;
+  position: relative;
+  bottom: 3rem;
+  width: 100px;
+  height: 4vh;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
+}
+.hidden {
+  visibility: hidden;
+}
+.information-container__item .left-content {
+  position: relative;
+  right: 6rem;
+  top: 1.6rem;
+}
+.information-container__item .right-content {
+  position: relative;
+  left: 6rem;
+  bottom: 1.7rem;
+}
+.information-container__item-name {
+  display: flex;
+  flex-direction: column;
 }
 
 .information-container__item-value,
@@ -113,4 +136,20 @@
 .pokemon-text {
   margin: 0;
   color: var(--card-color);
+}
+
+.close-icon {
+  display: block;
+  font-size: 25px;
+  margin-left: auto;
+  margin-right: 1.5rem;
+  cursor: pointer;
+  color: var(--navbar);
+  border-color: var(--navbar);
+}
+
+@media screen and (max-width: 576px) {
+  .abilities-list-compare {
+    padding: 0;
+  }
 }
