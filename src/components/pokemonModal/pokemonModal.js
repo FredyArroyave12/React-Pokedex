@@ -13,7 +13,7 @@ import ScrollLock from 'react-scrolllock';
 const PokemonModal = (props) => {
   const pokemon = props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const informationUnits = [' M', ' Kg', ''];
-  const informationClass = 'information-container__item';
+  const informationClass = 'information-container__item-modal';
   const informationClasses = [
     informationClass,
     informationClass,
@@ -46,11 +46,12 @@ const PokemonModal = (props) => {
                 >
                   Compare To...
                 </button>
-                <button className="pokemon-card__close" onClick={closeModal}>
-                  X
-                </button>
+                <span
+                  class="close-icon-modal far fa-times-circle"
+                  onClick={closeModal}
+                ></span>
               </div>
-              <div className="pokemon-container">
+              <div className="pokemon-container-modal">
                 <h2 className="pokemon-name">{pokemon.name.toUpperCase()}</h2>
                 <div className="image-container">
                   <img
@@ -72,7 +73,7 @@ const PokemonModal = (props) => {
                       </li>
                     ))}
                 </ul>
-                <div className="information-container">
+                <div className="information-container-modal">
                   {Object.keys(pokemon.information).map((key, index) => (
                     <div className={informationClasses[index]}>
                       <h3 className="information-container__item-value">
