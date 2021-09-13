@@ -5,7 +5,10 @@ const initialState = {
   isMobileItemsActive: false,
 };
 
-const navBarReducer = (state = initialState, action) => {
+const navBarReducer = (
+  state = initialState,
+  action: { type: string; payload: any }
+) => {
   switch (action.type) {
     case actionTypes.UPDATE_SEARCH:
       return {

@@ -1,15 +1,20 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import icon from '../../images/pokedex.png';
-import { connect } from 'react-redux';
+import { connect, RootStateOrAny } from 'react-redux';
 import {
   updateSearch,
   changeMobileItemsStatus,
 } from '../../redux/actions/navBarActions';
 
-const NavBar = (props) => {
+const NavBar = (props: {
+  updateSearch: (arg0: string) => void | undefined;
+  changeMobileItemsStatus: () => void;
+  isSearchActive: boolean;
+  navBar: { isMobileItemsActive: boolean };
+}) => {
   console.log(props);
-  const handleSearch = (event) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.updateSearch(event.target.value.toLowerCase());
   };
 
@@ -68,13 +73,15 @@ const NavBar = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (
+  dispatch: (arg0: { type: string; payload?: { searchContent: string } }) => any
+) => {
   return {
-    updateSearch: (text) => dispatch(updateSearch(text)),
+    updateSearch: (text: string) => dispatch(updateSearch(text)),
     changeMobileItemsStatus: () => dispatch(changeMobileItemsStatus()),
   };
 };

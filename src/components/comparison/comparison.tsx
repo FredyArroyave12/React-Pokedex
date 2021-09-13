@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { AnyIfEmpty, connect, RootStateOrAny } from 'react-redux';
 import {
   updateComparisonModalActive,
   updateComparing,
@@ -9,7 +9,16 @@ import pokeballInfo from '../../images/pokeInfo.png';
 import Chart from '../statsChart';
 import ScrollLock from 'react-scrolllock';
 
-const Comparison = (props) => {
+const Comparison = (props: {
+  pokemonData: {
+    pokemons: { [x: string]: any };
+    firstPokemon: string | number;
+    secondPokemon: string | number;
+    isComparisonActive: boolean;
+  };
+  updateComparing: () => void;
+  updateComparisonModalActive: () => void;
+}) => {
   const pokemon = props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const pokemon2 = props.pokemonData.pokemons[props.pokemonData.secondPokemon];
   const informationUnits = [' M', ' Kg', ''];
@@ -26,7 +35,7 @@ const Comparison = (props) => {
     props.updateComparisonModalActive();
   };
 
-  const handleCardClick = (event) => {
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
 
@@ -44,7 +53,7 @@ const Comparison = (props) => {
             >
               <div className="flex pt-4">
                 <span
-                  class="block text-2xl ml-auto mr-6 cursor-pointer text-navbar border-navbar far fa-times-circle"
+                  className="block text-2xl ml-auto mr-6 cursor-pointer text-navbar border-navbar far fa-times-circle"
                   onClick={closeModal}
                 ></span>
               </div>
@@ -103,27 +112,35 @@ const Comparison = (props) => {
                 <div className="mt-4 flex">
                   <ul className="flex p-0 flex-col justify-center text-center m-4 list-none">
                     {pokemon.abilities &&
-                      pokemon.abilities.map((item) => (
-                        <li
-                          className="uppercase text-center"
-                          key={item.ability.name}
-                        >
-                          {item.ability.name.charAt(0).toUpperCase() +
-                            item.ability.name.slice(1)}
-                        </li>
-                      ))}
+                      pokemon.abilities.map(
+                        (item: {
+                          ability: {
+                            name: React.Key | any;
+                          };
+                        }) => (
+                          <li
+                            className="uppercase text-center"
+                            key={item.ability.name}
+                          >
+                            {item.ability.name.charAt(0).toUpperCase() +
+                              item.ability.name.slice(1)}
+                          </li>
+                        )
+                      )}
                   </ul>
                   <ul className="flex flex-col justify-center text-center m-4 list-none">
                     {pokemon2.abilities &&
-                      pokemon2.abilities.map((item) => (
-                        <li
-                          className="uppercase text-center right"
-                          key={item.ability.name}
-                        >
-                          {item.ability.name.charAt(0).toUpperCase() +
-                            item.ability.name.slice(1)}
-                        </li>
-                      ))}
+                      pokemon2.abilities.map(
+                        (item: { ability: { name: React.Key | any } }) => (
+                          <li
+                            className="uppercase text-center right"
+                            key={item.ability.name}
+                          >
+                            {item.ability.name.charAt(0).toUpperCase() +
+                              item.ability.name.slice(1)}
+                          </li>
+                        )
+                      )}
                   </ul>
                 </div>
               </div>
@@ -138,7 +155,7 @@ const Comparison = (props) => {
                     Stats
                   </h3>
                 </div>
-                <Chart className=" w-96" />
+                <Chart />
               </div>
             </div>
           </div>
@@ -148,15 +165,14 @@ const Comparison = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    updateComparisonModalActive: (state) =>
-      dispatch(updateComparisonModalActive(state)),
-    updateComparing: (state) => dispatch(updateComparing(state)),
+    updateComparisonModalActive: () => dispatch(updateComparisonModalActive()),
+    updateComparing: () => dispatch(updateComparing()),
   };
 };
 

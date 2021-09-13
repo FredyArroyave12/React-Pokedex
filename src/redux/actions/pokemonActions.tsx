@@ -20,7 +20,7 @@ export const actionTypes = {
 
 export const fetchPokemonList =
   (url = utils.API_URL + '/pokemon') =>
-  (dispatch) => {
+  (dispatch: any) => {
     dispatch({
       type: actionTypes.POKEMON_LIST_REQUEST,
     });
@@ -48,7 +48,7 @@ export const fetchPokemonList =
       });
   };
 
-export const fetchPokemon = (index) => (dispatch) => {
+export const fetchPokemon = (index: any) => (dispatch: any) => {
   const url = utils.API_URL + '/pokemon/' + (index + 1);
   const state = store.getState();
   const pokemon = state.pokemonData.pokemons[index];
@@ -98,7 +98,7 @@ export const fetchPokemon = (index) => (dispatch) => {
   }
 };
 
-export const fetchPokemonSpecies = (index) => (dispatch) => {
+export const fetchPokemonSpecies = (index: number) => (dispatch: any) => {
   const url = utils.API_URL + '/pokemon-species/' + (index + 1);
   const state = store.getState();
   const pokemon = state.pokemonData.pokemons[index];
@@ -139,7 +139,7 @@ export const fetchPokemonSpecies = (index) => (dispatch) => {
   }
 };
 
-export const selectPokemon = (index) => {
+export const selectPokemon = (index: any) => {
   const state = store.getState();
   const key = !state.pokemonData.isComparing ? 'firstPokemon' : 'secondPokemon';
 
@@ -167,7 +167,7 @@ export const updateComparisonModalActive = () => ({
   type: actionTypes.COMPARISON_MODAL_ACTIVE,
 });
 
-const getStringGender = (index) => {
+const getStringGender = (index: any) => {
   if (index >= 0 && index <= 4) {
     return 'Male';
   } else if (index >= 4 && index <= 8) {

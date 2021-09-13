@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, RootStateOrAny } from 'react-redux';
 import {
   updatePokemonModalActive,
   updateComparing,
@@ -9,7 +9,15 @@ import pokeballInfo from '../../images/pokeInfo.png';
 import Chart from '../statsChart';
 import ScrollLock from 'react-scrolllock';
 
-const PokemonModal = (props) => {
+const PokemonModal = (props: {
+  pokemonData: {
+    pokemons: { [x: string]: any };
+    firstPokemon: string | number;
+    isModalActive: boolean;
+  };
+  updatePokemonModalActive: () => void;
+  updateComparing: () => void;
+}) => {
   const pokemon = props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const informationUnits = [' M', ' Kg', ''];
   const informationClass = 'm-0 pl-2 pr-2';
@@ -23,7 +31,7 @@ const PokemonModal = (props) => {
     props.updatePokemonModalActive();
   };
 
-  const handleCardClick = (event) => {
+  const handleCardClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
 
@@ -52,7 +60,7 @@ const PokemonModal = (props) => {
                   Compare To...
                 </button>
                 <span
-                  class="block text-2xl ml-auto mr-6 cursor-pointer text-navbar border-navbar far fa-times-circle"
+                  className="block text-2xl ml-auto mr-6 cursor-pointer text-navbar border-navbar far fa-times-circle"
                   onClick={closeModal}
                 ></span>
               </div>
@@ -72,7 +80,7 @@ const PokemonModal = (props) => {
                 </p>
                 <ul className="text-center p-0 uppercase list-none">
                   {pokemon.types &&
-                    pokemon.types.map((type) => (
+                    pokemon.types.map((type: any) => (
                       <li
                         className={
                           'inline-block border-solid border-2 border-white rounded mx-4 my-2 text-white px-2 py-2 bg-' +
@@ -111,12 +119,14 @@ const PokemonModal = (props) => {
                 </div>
                 <ul className="flex p-0 flex-col justify-center text-center list-none m-4">
                   {pokemon.abilities &&
-                    pokemon.abilities.map((item) => (
-                      <li className="m-2" key={item.ability.name}>
-                        {item.ability.name.charAt(0).toUpperCase() +
-                          item.ability.name.slice(1)}
-                      </li>
-                    ))}
+                    pokemon.abilities.map(
+                      (item: { ability: { name: React.Key | any } }) => (
+                        <li className="m-2" key={item.ability.name}>
+                          {item.ability.name.charAt(0).toUpperCase() +
+                            item.ability.name.slice(1)}
+                        </li>
+                      )
+                    )}
                 </ul>
               </div>
               <div className="flex flex-col items-center rounded-lg pb-2 bg-cardcolor m-6">
@@ -130,7 +140,7 @@ const PokemonModal = (props) => {
                     Stats
                   </h3>
                 </div>
-                <Chart className="chart" />
+                <Chart />
               </div>
             </div>
           </div>
@@ -140,15 +150,15 @@ const PokemonModal = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: (arg0: { type: string }) => void) => {
   return {
-    updatePokemonModalActive: (state) =>
-      dispatch(updatePokemonModalActive(state)),
-    updateComparing: (state) => dispatch(updateComparing(state)),
+    updatePokemonModalActive: (state: RootStateOrAny) =>
+      dispatch(updatePokemonModalActive()),
+    updateComparing: (state: RootStateOrAny) => dispatch(updateComparing()),
   };
 };
 

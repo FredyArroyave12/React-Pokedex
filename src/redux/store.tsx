@@ -1,14 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
 
-const composeEnhancers = composeWithDevTools({
-  name: 'PokeApp-pokedex',
-  realtime: true,
-  trace: true,
-  traceLimit: 20,
-});
+export const composeEnhancers =
+  window && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
 const store = createStore(
   rootReducer,

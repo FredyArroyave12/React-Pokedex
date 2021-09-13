@@ -17,7 +17,23 @@ const initialState = {
   error: null,
 };
 
-const pokemonReducer = (state = initialState, action) => {
+const pokemonReducer = (
+  state = initialState,
+  action: {
+    type: string;
+    payload: {
+      count: number;
+      next: string;
+      previous: boolean;
+      pokemons: string[];
+      error: any;
+      index: string | number;
+      pokemon: any;
+      gender: string;
+      description: string;
+    };
+  }
+) => {
   switch (action.type) {
     case actionTypes.POKEMON_LIST_REQUEST:
       return {

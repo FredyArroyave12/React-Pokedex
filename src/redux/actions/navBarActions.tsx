@@ -3,7 +3,7 @@ export const actionTypes = {
   MODIFY_MOBILE: 'MODIFY_MOBILE',
 };
 
-export const updateSearch = (searchContent) => {
+export const updateSearch = (searchContent: any) => {
   return {
     type: actionTypes.UPDATE_SEARCH,
     payload: {
