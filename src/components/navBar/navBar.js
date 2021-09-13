@@ -6,9 +6,9 @@ import {
   updateSearch,
   changeMobileItemsStatus,
 } from '../../redux/actions/navBarActions';
-import './navBar.css';
 
 const NavBar = (props) => {
+  console.log(props);
   const handleSearch = (event) => {
     props.updateSearch(event.target.value.toLowerCase());
   };
@@ -18,24 +18,30 @@ const NavBar = (props) => {
   };
 
   return (
-    <div className="main-nav-container">
-      <nav className="nav-bar">
-        <div className="nav-bar-container">
-          <NavLink to="/" className="home-link">
-            <img src={icon} alt="PokéDex" className="home-link-img" />
+    <div className="sticky flex flex-col items-end justify-center top-0 left-0 z-10">
+      <nav className="w-screen h-16 flex justify-between bg-navbar shadow-nav-shadow">
+        <div className="hidden md:flex md:items-center md:m-0 md:w-full">
+          <NavLink to="/" className="m-0 pl-8">
+            <img src={icon} alt="PokéDex" className="h-12" />
           </NavLink>
-          <NavLink to="/pokemons" className="normal-link">
+          <NavLink
+            to="/pokemons"
+            className="no-underline p-0 h-px ml-12 mb-4 text-white"
+          >
             Pokemons
           </NavLink>
         </div>
-        <button className="burger-button" onClick={changeMobileItemsStatus}>
-          <span className="burger-button-bar" />
-          <span className="burger-button-bar" />
-          <span className="burger-button-bar" />
+        <button
+          className="inline cursor-pointer bg-transparent border-opacity-0 outline-none ml-4  md:ml-4 md:hidden"
+          onClick={changeMobileItemsStatus}
+        >
+          <span className="block w-8 h-1 bg-white mb-1.5 mx-2 my-0 " />
+          <span className="block w-8 h-1 bg-white mb-1.5 mx-2 my-0 " />
+          <span className="block w-8 h-1 bg-white mb-1.5 mx-2 my-0 " />
         </button>
         {props.isSearchActive && (
           <input
-            className="search-input"
+            className="m-4 pr-8 rounded-lg"
             type="text"
             placeholder="Search"
             onChange={handleSearch}
@@ -43,11 +49,17 @@ const NavBar = (props) => {
         )}
       </nav>
       {props.navBar.isMobileItemsActive && (
-        <div className="mobile-bar-container">
-          <NavLink className="mobile-link" to="/">
+        <div className="w-screen p-4 flex flex-col bg-white shadow-nav-shadow md:hidden">
+          <NavLink
+            className="mt-2 p-2 block text-center no-underline text-lightblack md:mt-2 md:p-2 md:block md:text-center md:no-underline md:text-lightblack"
+            to="/"
+          >
             Home
           </NavLink>
-          <NavLink className="mobile-link" to="/pokemons">
+          <NavLink
+            className="mt-2 p-2 block text-center no-underline text-lightblack"
+            to="/pokemons"
+          >
             Pokémons
           </NavLink>
         </div>

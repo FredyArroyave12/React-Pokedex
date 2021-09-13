@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
-import './statsChart.css';
 
 const StatsChart = (props) => {
   const firstPokemon =
@@ -69,7 +68,7 @@ const StatsChart = (props) => {
   };
 
   return (
-    <div className="graph">
+    <div className=" w-80 md:w-96">
       <Bar
         id="stats_chart"
         data={data}

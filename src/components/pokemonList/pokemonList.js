@@ -12,7 +12,6 @@ import PokemonModal from '../pokemonModal';
 import Comparison from '../comparison';
 import NavBar from '../navBar';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import './pokemonList.css';
 
 const PokemonList = (props) => {
   const fetchPokemonList = () => {
@@ -37,17 +36,19 @@ const PokemonList = (props) => {
   };
 
   return (
-    <div className="pokemon-list">
+    <div className="">
       <NavBar isSearchActive={true} />
       <PokemonModal />
       <Comparison />
       {props.pokemonData.isComparing && (
         <div
           className={
-            props.pokemonData.isComparing ? 'comparison-pokemon' : 'hidden'
+            props.pokemonData.isComparing
+              ? 'fixed border-solid border-2 rounded-lg border-gray-900 bg-white  right-4 	 '
+              : ''
           }
         >
-          <h2 className="comparison-name">
+          <h2 className="font-medium text-sm px-4 py-8">
             Comparing:{' '}
             {props.pokemonData.pokemons[
               props.pokemonData.firstPokemon
@@ -60,24 +61,24 @@ const PokemonList = (props) => {
         next={fetchPokemonList}
         hasMore={true}
       >
-        <ul className="pokemon__items">
+        <ul className="m-8 mr-16 ml-16 p-0 grid grid-cols-grid-list gap-8 list-none justify-items-stretch">
           {props.pokemonData.pokemons
             .filter((item) => item.name.includes(props.navBar.searchContent))
             .map((pokemon) => {
               const index = props.pokemonData.pokemons.indexOf(pokemon);
               return (
                 <li
-                  className="pokemon__item"
+                  className="items-center max-w-full cursor-pointer shadow-shadow-list hover:bg-hoverpokemon"
                   key={index}
                   onClick={() => fetchPokemon(index)}
                 >
                   <img
                     loading="lazy"
-                    className="pokemon__item-img"
+                    className="w-48 block m-auto mt-5 mb-5 rendering-pixelated rounded-tl-2xl rounded-tr-2xl"
                     src={utils.SPRITES_URL + (index + 1) + '.png'}
                     alt={pokemon.name}
                   />
-                  <h3 className="pokemon__item-name">
+                  <h3 className="m-0 p-3 text-center text-xl font-semibold uppercase bg-lightgray text-withe">
                     {pokemon.name.charAt(0).toUpperCase() +
                       pokemon.name.slice(1)}
                   </h3>

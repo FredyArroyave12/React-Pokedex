@@ -7,13 +7,12 @@ import {
 import utils from '../../utils';
 import pokeballInfo from '../../images/pokeInfo.png';
 import Chart from '../statsChart';
-import './pokemonModal.css';
 import ScrollLock from 'react-scrolllock';
 
 const PokemonModal = (props) => {
   const pokemon = props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const informationUnits = [' M', ' Kg', ''];
-  const informationClass = 'information-container__item-modal';
+  const informationClass = 'm-0 pl-2 pr-2';
   const informationClasses = [
     informationClass,
     informationClass,
@@ -37,35 +36,48 @@ const PokemonModal = (props) => {
     <div>
       {props.pokemonData.isModalActive && (
         <ScrollLock>
-          <div className="modal-container" onClick={closeModal}>
-            <div className="card-modal" onClick={handleCardClick}>
-              <div className="pokemon-card__title">
+          <div
+            className="fixed top-0 w-screen h-screen m-0 cursor-pointer z-10 overflow-auto bg-shadowbg"
+            onClick={closeModal}
+          >
+            <div
+              className=" w-11/12 max-w-2xl m-auto bg-white pb-5 rounded-lg cursor-auto"
+              onClick={handleCardClick}
+            >
+              <div className="flex pt-4">
                 <button
-                  className="pokemon-card__compare"
+                  className="cursor-pointer rounded ml-6 border-solid border border-white text-white px-2 py-1 bg-navbar hover:bg-cardcolor active:bg-cardcolor hover:text-navbar active:text-navbar"
                   onClick={comparePokemon}
                 >
                   Compare To...
                 </button>
                 <span
-                  class="close-icon-modal far fa-times-circle"
+                  class="block text-2xl ml-auto mr-6 cursor-pointer text-navbar border-navbar far fa-times-circle"
                   onClick={closeModal}
                 ></span>
               </div>
-              <div className="pokemon-container-modal">
-                <h2 className="pokemon-name">{pokemon.name.toUpperCase()}</h2>
-                <div className="image-container">
+              <div className="flex flex-col items-center rounded-lg pb-2 bg-cardcolor mt-6 mx-6">
+                <h2 className="text-center mt-8 text-black text-2xl font-bold m-2 uppercase">
+                  {pokemon.name.toUpperCase()}
+                </h2>
+                <div className="rendering-pixelated w-48">
                   <img
-                    className="pokemon-img"
+                    className="w-full"
                     src={utils.SPRITES_URL + pokemon.id + '.png'}
                     alt={pokemon.name}
                   />
                 </div>
-                <p className="pokemon-description">{pokemon.description}</p>
-                <ul className="pokemon-types">
+                <p className="text-center mx-2 my-10 text-lightblack">
+                  {pokemon.description}
+                </p>
+                <ul className="text-center p-0 uppercase list-none">
                   {pokemon.types &&
                     pokemon.types.map((type) => (
                       <li
-                        className={'pokemon-type ' + type.type.name}
+                        className={
+                          'inline-block border-solid border-2 border-white rounded mx-4 my-2 text-white px-2 py-2 bg-' +
+                          type.type.name
+                        }
                         key={type.type.name}
                       >
                         {type.type.name.charAt(0).toUpperCase() +
@@ -73,46 +85,50 @@ const PokemonModal = (props) => {
                       </li>
                     ))}
                 </ul>
-                <div className="information-container-modal">
+                <div className="flex w-4/5 text-center mt-4 justify-center pb-2">
                   {Object.keys(pokemon.information).map((key, index) => (
                     <div className={informationClasses[index]}>
-                      <h3 className="information-container__item-value">
+                      <h3 className="text-base font-medium m-2 text-black">
                         {pokemon.information[key] + informationUnits[index]}
                       </h3>
-                      <h3 className="information-container__item-name">
+                      <h3 className="text-base font-medium m-2 text-lightblack">
                         {key}
                       </h3>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="pokemon-container">
-                <div className="pokemon-container__title">
+              <div className="flex flex-col items-center rounded-lg pb-2 bg-cardcolor m-6">
+                <div className="mt-2 flex justify-center items-center">
                   <img
-                    className="pokemon-container__title-img"
+                    className="w-8 h-8 mr-2"
                     src={pokeballInfo}
                     alt="PokeballInfo"
                   />
-                  <h3 className="pokemon-container__title-text">Abilities</h3>
+                  <h3 className="text-center mt-0 text-black text-2xl font-bold m-2 uppercase">
+                    Abilities
+                  </h3>
                 </div>
-                <ul className="abilities-list">
+                <ul className="flex p-0 flex-col justify-center text-center list-none m-4">
                   {pokemon.abilities &&
                     pokemon.abilities.map((item) => (
-                      <li className="abilities-item" key={item.ability.name}>
+                      <li className="m-2" key={item.ability.name}>
                         {item.ability.name.charAt(0).toUpperCase() +
                           item.ability.name.slice(1)}
                       </li>
                     ))}
                 </ul>
               </div>
-              <div className="pokemon-container">
-                <div className="pokemon-container__title">
+              <div className="flex flex-col items-center rounded-lg pb-2 bg-cardcolor m-6">
+                <div className="mt-2 flex justify-center items-center">
                   <img
-                    className="pokemon-container__title-img"
+                    className="w-8 h-8 mr-2"
                     src={pokeballInfo}
                     alt="PokeballInfo"
                   />
-                  <h3 className="pokemon-container__title-text">Stats</h3>
+                  <h3 className="text-center mt-0 text-black text-2xl font-bold m-2 uppercase">
+                    Stats
+                  </h3>
                 </div>
                 <Chart className="chart" />
               </div>
