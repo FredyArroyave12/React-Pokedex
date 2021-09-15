@@ -9,11 +9,20 @@ import pokeballInfo from '../../images/pokeInfo.png';
 import Chart from '../statsChart';
 import ScrollLock from 'react-scrolllock';
 
+interface pokemons {
+  id: string;
+  name: string;
+  url: string;
+  information: { height: number; weight: number };
+  abilities: string;
+  stats: string | number;
+  types: string;
+}
 const Comparison = (props: {
   pokemonData: {
-    pokemons: { [x: string]: any };
-    firstPokemon: string | number;
-    secondPokemon: string | number;
+    pokemons: pokemons[];
+    firstPokemon: number;
+    secondPokemon: number;
     isComparisonActive: boolean;
   };
   updateComparing: () => void;
@@ -115,7 +124,7 @@ const Comparison = (props: {
                       pokemon.abilities.map(
                         (item: {
                           ability: {
-                            name: React.Key | any;
+                            name: React.Key | string;
                           };
                         }) => (
                           <li
@@ -131,7 +140,7 @@ const Comparison = (props: {
                   <ul className="flex flex-col justify-center text-center m-4 list-none">
                     {pokemon2.abilities &&
                       pokemon2.abilities.map(
-                        (item: { ability: { name: React.Key | any } }) => (
+                        (item: { ability: { name: React.Key | string } }) => (
                           <li
                             className="uppercase text-center right"
                             key={item.ability.name}
@@ -169,7 +178,7 @@ const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: RootStateOrAny) => {
   return {
     updateComparisonModalActive: () => dispatch(updateComparisonModalActive()),
     updateComparing: () => dispatch(updateComparing()),

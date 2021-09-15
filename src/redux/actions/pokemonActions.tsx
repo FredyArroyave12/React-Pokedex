@@ -1,6 +1,18 @@
 import utils from '../../utils';
 import store from '../store';
-
+interface pokemons {
+  name: string;
+  url: string;
+}
+interface pokemon {
+  id: number;
+  name: string;
+  information: { height: number; weight: number };
+  abilities: string;
+  stats: string | number;
+  types: string;
+  url: string;
+}
 export const actionTypes = {
   POKEMON_LIST_REQUEST: 'POKEMON_LIST_REQUEST',
   POKEMON_LIST_SUCCESS: 'POKEMON_LIST_SUCCESS',
@@ -20,7 +32,19 @@ export const actionTypes = {
 
 export const fetchPokemonList =
   (url = utils.API_URL + '/pokemon') =>
-  (dispatch: any) => {
+  (
+    dispatch: (arg0: {
+      type: string;
+      payload?:
+        | {
+            count: number;
+            next: string;
+            previous: boolean;
+            pokemons: pokemons[];
+          }
+        | { error: string };
+    }) => void
+  ) => {
     dispatch({
       type: actionTypes.POKEMON_LIST_REQUEST,
     });
@@ -48,98 +72,114 @@ export const fetchPokemonList =
       });
   };
 
-export const fetchPokemon = (index: any) => (dispatch: any) => {
-  const url = utils.API_URL + '/pokemon/' + (index + 1);
-  const state = store.getState();
-  const pokemon = state.pokemonData.pokemons[index];
+export const fetchPokemon =
+  (index: number) =>
+  (
+    dispatch: (arg0: {
+      type: string;
+      payload?: { index: number; pokemon: pokemon } | { error: null | string };
+    }) => void
+  ) => {
+    const url = utils.API_URL + '/pokemon/' + (index + 1);
+    const state = store.getState();
+    const pokemon = state.pokemonData.pokemons[index];
 
-  if (pokemon.dataLoaded && pokemon.speciesLoaded) {
-    dispatch({
-      type: actionTypes.POKEMON_SUCCESS,
-      payload: {
-        index,
-        pokemon,
-      },
-    });
-  } else {
-    dispatch({
-      type: actionTypes.POKEMON_REQUEST,
-    });
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: actionTypes.POKEMON_SUCCESS,
-          payload: {
-            index,
-            pokemon: {
-              id: data.id,
-              name: data.name,
-              information: {
-                height: data.height / 10,
-                weight: data.weight / 10,
+    if (pokemon.dataLoaded && pokemon.speciesLoaded) {
+      dispatch({
+        type: actionTypes.POKEMON_SUCCESS,
+        payload: {
+          index,
+          pokemon,
+        },
+      });
+    } else {
+      dispatch({
+        type: actionTypes.POKEMON_REQUEST,
+      });
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: actionTypes.POKEMON_SUCCESS,
+            payload: {
+              index,
+              pokemon: {
+                id: data.id,
+                name: data.name,
+                information: {
+                  height: data.height / 10,
+                  weight: data.weight / 10,
+                },
+                abilities: data.abilities,
+                stats: data.stats,
+                types: data.types,
+                url,
               },
-              abilities: data.abilities,
-              stats: data.stats,
-              types: data.types,
-              url,
             },
-          },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: actionTypes.POKEMON_ERROR,
+            payload: {
+              error: error,
+            },
+          });
         });
-      })
-      .catch((error) => {
-        dispatch({
-          type: actionTypes.POKEMON_ERROR,
-          payload: {
-            error: error,
-          },
-        });
+    }
+  };
+
+export const fetchPokemonSpecies =
+  (index: number) =>
+  (
+    dispatch: (arg0: {
+      type: string;
+      payload?:
+        | { index: number; description: string; gender: string }
+        | { error: string };
+    }) => void
+  ) => {
+    const url = utils.API_URL + '/pokemon-species/' + (index + 1);
+    const state = store.getState();
+    const pokemon = state.pokemonData.pokemons[index];
+
+    if (pokemon.dataLoaded && pokemon.speciesLoaded) {
+      dispatch({
+        type: actionTypes.POKEMON_SPECIES_SUCCESS,
+        payload: {
+          index,
+          description: pokemon.description,
+          gender: pokemon.information.gender,
+        },
       });
-  }
-};
-
-export const fetchPokemonSpecies = (index: number) => (dispatch: any) => {
-  const url = utils.API_URL + '/pokemon-species/' + (index + 1);
-  const state = store.getState();
-  const pokemon = state.pokemonData.pokemons[index];
-
-  if (pokemon.dataLoaded && pokemon.speciesLoaded) {
-    dispatch({
-      type: actionTypes.POKEMON_SPECIES_SUCCESS,
-      payload: {
-        index,
-        description: pokemon.description,
-        gender: pokemon.information.gender,
-      },
-    });
-  } else {
-    dispatch({
-      type: actionTypes.POKEMON_SPECIES_REQUEST,
-    });
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({
-          type: actionTypes.POKEMON_SPECIES_SUCCESS,
-          payload: {
-            index,
-            description: data.flavor_text_entries[1].flavor_text,
-            gender: getStringGender(data.gender_rate),
-          },
-        });
-      })
-      .catch((error) => {
-        dispatch({
-          type: actionTypes.SPECIES_ERROR,
-          payload: {
-            error: error,
-          },
-        });
+    } else {
+      dispatch({
+        type: actionTypes.POKEMON_SPECIES_REQUEST,
       });
-  }
-};
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          dispatch({
+            type: actionTypes.POKEMON_SPECIES_SUCCESS,
+            payload: {
+              index,
+              description: data.flavor_text_entries[1].flavor_text,
+              gender: getStringGender(data.gender_rate),
+            },
+          });
+        })
+        .catch((error) => {
+          dispatch({
+            type: actionTypes.SPECIES_ERROR,
+            payload: {
+              error: error,
+            },
+          });
+        });
+    }
+  };
 
-export const selectPokemon = (index: any) => {
+export const selectPokemon = (index: number) => {
   const state = store.getState();
   const key = !state.pokemonData.isComparing ? 'firstPokemon' : 'secondPokemon';
 
@@ -167,7 +207,7 @@ export const updateComparisonModalActive = () => ({
   type: actionTypes.COMPARISON_MODAL_ACTIVE,
 });
 
-const getStringGender = (index: any) => {
+const getStringGender = (index: number) => {
   if (index >= 0 && index <= 4) {
     return 'Male';
   } else if (index >= 4 && index <= 8) {

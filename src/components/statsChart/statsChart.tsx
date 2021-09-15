@@ -1,8 +1,26 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, RootStateOrAny } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
 
-const StatsChart = (props: any) => {
+interface baseStat {
+  value: string | number;
+  index: number;
+  array: string[];
+}
+interface pokemons {
+  id: number;
+  stats: string[];
+  name: string;
+  url: string;
+}
+const StatsChart = (props: {
+  pokemonData: {
+    pokemons: pokemons[];
+    firstPokemon: number;
+    secondPokemon: number;
+    isComparing: boolean;
+  };
+}) => {
   const firstPokemon =
     props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const secondPokemon =
@@ -17,11 +35,11 @@ const StatsChart = (props: any) => {
   };
 
   const data = {
-    labels: firstPokemon.stats.map(({ stat }: any) => stat.name),
+    labels: firstPokemon.stats.map(({ stat }: baseStat[]) => stat.name),
     datasets: [
       {
         label: firstPokemon.name,
-        data: firstPokemon.stats.map(({ base_stat }: any) => base_stat),
+        data: firstPokemon.stats.map(({ base_stat }: baseStat[]) => base_stat),
         backgroundColor: '#008080',
         borderWidth: 3,
         hidden: false,
@@ -34,7 +52,7 @@ const StatsChart = (props: any) => {
       ...data.datasets,
       {
         label: secondPokemon.name,
-        data: secondPokemon.stats.map(({ base_stat }: any) => base_stat),
+        data: secondPokemon.stats.map(({ base_stat }: baseStat[]) => base_stat),
         backgroundColor: '#3F26BF',
         borderWidth: 3,
         hidden: !props.pokemonData.isComparing,
@@ -69,12 +87,17 @@ const StatsChart = (props: any) => {
 
   return (
     <div className=" w-80 md:w-96">
-      <Bar id="stats_chart" data={data} options={options} />
+      <Bar
+        id="stats_chart"
+        data={data}
+        options={options}
+        datasetKeyProvider={() => datasetKeyProvider}
+      />
     </div>
   );
 };
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 

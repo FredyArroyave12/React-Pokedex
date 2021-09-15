@@ -1,5 +1,8 @@
 import { actionTypes } from '../actions/navBarActions';
-
+interface payload {
+  searchContent: string;
+  isMobileItemsActive: boolean;
+}
 const initialState = {
   searchContent: '',
   isMobileItemsActive: false,
@@ -7,7 +10,10 @@ const initialState = {
 
 const navBarReducer = (
   state = initialState,
-  action: { type: string; payload: any }
+  action: {
+    type: string;
+    payload: payload;
+  }
 ) => {
   switch (action.type) {
     case actionTypes.UPDATE_SEARCH:

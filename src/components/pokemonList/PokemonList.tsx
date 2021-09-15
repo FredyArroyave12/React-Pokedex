@@ -12,21 +12,26 @@ import PokemonModal from '../pokemonModal';
 import Comparison from '../comparison';
 import NavBar from '../navBar';
 import InfiniteScroll from 'react-infinite-scroll-component';
+interface pokemons {
+  name: string;
+  url: string;
+}
 
 const PokemonList = (props: {
-  fetchPokemonList: (arg0: any) => void;
+  fetchPokemonList: (arg0: string) => void;
   pokemonData: {
-    next: any;
-    didLoadPokemons: any;
-    isComparing: any;
-    pokemons: any[];
-    firstPokemon: string | number;
+    next: string;
+    index: number;
+    didLoadPokemons: boolean;
+    isComparing: boolean;
+    pokemons: pokemons[];
+    firstPokemon: number;
   };
   updateLoadPokemon: () => void;
   selectPokemon: (arg0: number) => void;
   fetchPokemon: (arg0: number) => void;
   fetchPokemonSpecies: (arg0: number) => void;
-  navBar: { searchContent: any };
+  navBar: { searchContent: string };
 }) => {
   const fetchPokemonList = () => {
     props.fetchPokemonList(props.pokemonData.next);
@@ -51,22 +56,9 @@ const PokemonList = (props: {
 
   return (
     <div className="">
-      <NavBar
-        isSearchActive={true}
-        updateSearch={undefined}
-        changeMobileItemsStatus={undefined}
-        navBar={undefined}
-      />
-      <PokemonModal
-        pokemonData={undefined}
-        updateComparing={undefined}
-        updatePokemonModalActive={undefined}
-      />
-      <Comparison
-        pokemonData={undefined}
-        updateComparing={undefined}
-        updateComparisonModalActive={undefined}
-      />
+      <NavBar isSearchActive={true} />
+      <PokemonModal />
+      <Comparison />
       {props.pokemonData.isComparing && (
         <div
           className={
@@ -120,7 +112,7 @@ const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: RootStateOrAny) => {
   return {
     updateLoadPokemon: () => dispatch(updateLoadPokemon()),
     selectPokemon: (index: number) => dispatch(selectPokemon(index)),

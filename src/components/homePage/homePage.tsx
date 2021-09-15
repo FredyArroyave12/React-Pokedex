@@ -11,12 +11,7 @@ const HomePage = () => {
         src={pikabg}
         alt="pikabg"
       />
-      <NavBar
-        isSearchActive={false}
-        updateSearch={undefined}
-        changeMobileItemsStatus={undefined}
-        navBar={undefined}
-      />
+      <NavBar isSearchActive={false} />
       <div>
         <div className="static rounded-lg top-2/4 left-2/4 half-width half-height bg-lightwhite -translate-x-1/2 -translate-y-1/2 ">
           <div className="flex flex-col justify-center items-center w-full h-full mt-40 ">

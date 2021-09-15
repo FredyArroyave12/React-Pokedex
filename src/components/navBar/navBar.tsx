@@ -8,7 +8,7 @@ import {
 } from '../../redux/actions/navBarActions';
 
 const NavBar = (props: {
-  updateSearch: (arg0: string) => void | undefined;
+  updateSearch: (arg0: string) => void;
   changeMobileItemsStatus: () => void;
   isSearchActive: boolean;
   navBar: { isMobileItemsActive: boolean };
@@ -78,7 +78,10 @@ const mapStateToProps = (state: RootStateOrAny) => {
 };
 
 const mapDispatchToProps = (
-  dispatch: (arg0: { type: string; payload?: { searchContent: string } }) => any
+  dispatch: (arg0: {
+    type: string;
+    payload?: { searchContent: string };
+  }) => void
 ) => {
   return {
     updateSearch: (text: string) => dispatch(updateSearch(text)),

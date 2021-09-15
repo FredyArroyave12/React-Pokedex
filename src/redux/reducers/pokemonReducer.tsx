@@ -1,6 +1,29 @@
 import { actionTypes } from '../actions/pokemonActions';
 import utils from '../../utils';
-
+interface pokemons {
+  name: string;
+  url: string;
+}
+interface pokemon {
+  id: number;
+  name: string;
+  information: { height: number; weight: number };
+  abilities: string;
+  stats: string | number;
+  types: string;
+  url: string;
+}
+interface payload {
+  count: number;
+  next: string;
+  previous: boolean;
+  pokemons: pokemons[];
+  error: null;
+  index: number;
+  pokemon: pokemon;
+  gender: string;
+  description: string;
+}
 const initialState = {
   count: 0,
   next: utils.API_URL + '/pokemon',
@@ -21,17 +44,7 @@ const pokemonReducer = (
   state = initialState,
   action: {
     type: string;
-    payload: {
-      count: number;
-      next: string;
-      previous: boolean;
-      pokemons: string[];
-      error: any;
-      index: string | number;
-      pokemon: any;
-      gender: string;
-      description: string;
-    };
+    payload: payload;
   }
 ) => {
   switch (action.type) {
