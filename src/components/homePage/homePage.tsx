@@ -3,7 +3,7 @@ import NavBar from '../navBar';
 import { NavLink } from 'react-router-dom';
 import pikabg from '../../images/pikaBg.gif';
 
-const HomePage = () => {
+const HomePage: React.FC = (): JSX.Element => {
   return (
     <div className="relative">
       <img

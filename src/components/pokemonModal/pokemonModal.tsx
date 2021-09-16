@@ -8,23 +8,14 @@ import utils from '../../utils';
 import pokeballInfo from '../../images/pokeInfo.png';
 import Chart from '../statsChart';
 import ScrollLock from 'react-scrolllock';
-interface pokemons {
-  name: string;
-  url: string;
-}
-
-interface pokemonData {
-  pokemons: pokemons[];
-  firstPokemon: number;
-  isModalActive: boolean;
-}
-
-const PokemonModal = (props: {
+import { pokemonData } from '../../interfaces/pokemonData';
+interface props {
   pokemonData: pokemonData;
 
   updatePokemonModalActive: () => void;
   updateComparing: () => void;
-}) => {
+}
+const PokemonModal: React.FC<props> = (props): JSX.Element => {
   const pokemon = props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const informationUnits = [' M', ' Kg', ''];
   const informationClass = 'm-0 pl-2 pr-2';
@@ -163,7 +154,7 @@ const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
-const mapDispatchToProps = (dispatch: (arg0: { type: string }) => void) => {
+const mapDispatchToProps = (dispatch: (dispatch: { type: string }) => void) => {
   return {
     updatePokemonModalActive: (state: RootStateOrAny) =>
       dispatch(updatePokemonModalActive()),

@@ -1,18 +1,8 @@
 import utils from '../../utils';
 import store from '../store';
-interface pokemons {
-  name: string;
-  url: string;
-}
-interface pokemon {
-  id: number;
-  name: string;
-  information: { height: number; weight: number };
-  abilities: string;
-  stats: string | number;
-  types: string;
-  url: string;
-}
+import { pokemon } from '../../interfaces/pokemon';
+import { pokemons } from '../../interfaces/pokemons';
+
 export const actionTypes = {
   POKEMON_LIST_REQUEST: 'POKEMON_LIST_REQUEST',
   POKEMON_LIST_SUCCESS: 'POKEMON_LIST_SUCCESS',
@@ -33,7 +23,7 @@ export const actionTypes = {
 export const fetchPokemonList =
   (url = utils.API_URL + '/pokemon') =>
   (
-    dispatch: (arg0: {
+    dispatch: (fetchDispatch: {
       type: string;
       payload?:
         | {

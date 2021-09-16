@@ -1,18 +1,7 @@
 import { actionTypes } from '../actions/pokemonActions';
 import utils from '../../utils';
-interface pokemons {
-  name: string;
-  url: string;
-}
-interface pokemon {
-  id: number;
-  name: string;
-  information: { height: number; weight: number };
-  abilities: string;
-  stats: string | number;
-  types: string;
-  url: string;
-}
+import { pokemon } from '../../interfaces/pokemon';
+import { pokemons } from '../../interfaces/pokemons';
 interface payload {
   count: number;
   next: string;
@@ -20,7 +9,7 @@ interface payload {
   pokemons: pokemons[];
   error: null;
   index: number;
-  pokemon: pokemon;
+  pokemon: pokemon[];
   gender: string;
   description: string;
 }

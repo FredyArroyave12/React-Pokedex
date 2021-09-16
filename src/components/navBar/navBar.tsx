@@ -6,14 +6,13 @@ import {
   updateSearch,
   changeMobileItemsStatus,
 } from '../../redux/actions/navBarActions';
-
-const NavBar = (props: {
-  updateSearch: (arg0: string) => void;
+interface props {
+  updateSearch: (search: string) => void;
   changeMobileItemsStatus: () => void;
   isSearchActive: boolean;
   navBar: { isMobileItemsActive: boolean };
-}) => {
-  console.log(props);
+}
+const NavBar: React.FC<props> = (props): JSX.Element => {
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     props.updateSearch(event.target.value.toLowerCase());
   };
@@ -78,7 +77,7 @@ const mapStateToProps = (state: RootStateOrAny) => {
 };
 
 const mapDispatchToProps = (
-  dispatch: (arg0: {
+  dispatch: (dispatch: {
     type: string;
     payload?: { searchContent: string };
   }) => void

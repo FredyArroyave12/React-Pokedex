@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import sadPikachu from '../../images/sadPikachu.jpeg';
 
-const PageNotFound = () => {
+const PageNotFound: React.FC = (): JSX.Element => {
   return (
     <div className="h-screen relative">
       <img
@@ -11,7 +11,7 @@ const PageNotFound = () => {
         alt="sadPikachu"
       />
       <div className=" flex flex-col justify-center items-center h-full  text-lightblack bg-center">
-        <h1 className="m-0 mb-56 text-7xl	z-20">SORRY!</h1>
+        <h1 className="m-0 mb-56 text-7xl z-20">SORRY!</h1>
         <h2 className="m-0 text-6xl z-20">Page Not Found</h2>
         <NavLink
           to="/pokemons"

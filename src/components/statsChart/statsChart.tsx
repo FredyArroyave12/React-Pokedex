@@ -1,26 +1,22 @@
 import React from 'react';
 import { connect, RootStateOrAny } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
+import { pokemons } from '../../interfaces/pokemons';
 
 interface baseStat {
   value: string | number;
   index: number;
   array: string[];
 }
-interface pokemons {
-  id: number;
-  stats: string[];
-  name: string;
-  url: string;
-}
-const StatsChart = (props: {
+interface props {
   pokemonData: {
     pokemons: pokemons[];
     firstPokemon: number;
     secondPokemon: number;
     isComparing: boolean;
   };
-}) => {
+}
+const StatsChart: React.FC<props> = (props): JSX.Element => {
   const firstPokemon =
     props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const secondPokemon =

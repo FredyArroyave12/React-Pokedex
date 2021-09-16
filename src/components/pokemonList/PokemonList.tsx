@@ -12,27 +12,18 @@ import PokemonModal from '../pokemonModal';
 import Comparison from '../comparison';
 import NavBar from '../navBar';
 import InfiniteScroll from 'react-infinite-scroll-component';
-interface pokemons {
-  name: string;
-  url: string;
-}
+import { pokemonData } from '../../interfaces/pokemonData';
 
-const PokemonList = (props: {
-  fetchPokemonList: (arg0: string) => void;
-  pokemonData: {
-    next: string;
-    index: number;
-    didLoadPokemons: boolean;
-    isComparing: boolean;
-    pokemons: pokemons[];
-    firstPokemon: number;
-  };
+interface props {
+  fetchPokemonList: (fetch: string) => void;
+  pokemonData: pokemonData;
   updateLoadPokemon: () => void;
-  selectPokemon: (arg0: number) => void;
-  fetchPokemon: (arg0: number) => void;
-  fetchPokemonSpecies: (arg0: number) => void;
+  selectPokemon: (pokeSelect: number) => void;
+  fetchPokemon: (pokeFetch: number) => void;
+  fetchPokemonSpecies: (speciesFetch: number) => void;
   navBar: { searchContent: string };
-}) => {
+}
+const PokemonList: React.FC<props> = (props): JSX.Element => {
   const fetchPokemonList = () => {
     props.fetchPokemonList(props.pokemonData.next);
   };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnyIfEmpty, connect, RootStateOrAny } from 'react-redux';
+import { connect, RootStateOrAny } from 'react-redux';
 import {
   updateComparisonModalActive,
   updateComparing,
@@ -8,26 +8,13 @@ import utils from '../../utils';
 import pokeballInfo from '../../images/pokeInfo.png';
 import Chart from '../statsChart';
 import ScrollLock from 'react-scrolllock';
-
-interface pokemons {
-  id: string;
-  name: string;
-  url: string;
-  information: { height: number; weight: number };
-  abilities: string;
-  stats: string | number;
-  types: string;
-}
-const Comparison = (props: {
-  pokemonData: {
-    pokemons: pokemons[];
-    firstPokemon: number;
-    secondPokemon: number;
-    isComparisonActive: boolean;
-  };
+import { pokemonData } from '../../interfaces/pokemonData';
+interface props {
+  pokemonData: pokemonData;
   updateComparing: () => void;
   updateComparisonModalActive: () => void;
-}) => {
+}
+const Comparison: React.FC<props> = (props): JSX.Element => {
   const pokemon = props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const pokemon2 = props.pokemonData.pokemons[props.pokemonData.secondPokemon];
   const informationUnits = [' M', ' Kg', ''];
