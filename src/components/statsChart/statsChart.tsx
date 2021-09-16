@@ -1,9 +1,22 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, RootStateOrAny } from 'react-redux';
 import { Bar } from 'react-chartjs-2';
-import './statsChart.css';
+import { pokemons } from '../../interfaces/pokemons';
 
-const StatsChart = (props) => {
+interface baseStat {
+  value: string | number;
+  index: number;
+  array: string[];
+}
+interface props {
+  pokemonData: {
+    pokemons: pokemons[];
+    firstPokemon: number;
+    secondPokemon: number;
+    isComparing: boolean;
+  };
+}
+const StatsChart: React.FC<props> = (props): JSX.Element => {
   const firstPokemon =
     props.pokemonData.pokemons[props.pokemonData.firstPokemon];
   const secondPokemon =
@@ -18,11 +31,11 @@ const StatsChart = (props) => {
   };
 
   const data = {
-    labels: firstPokemon.stats.map(({ stat }) => stat.name),
+    labels: firstPokemon.stats.map(({ stat }: baseStat[]) => stat.name),
     datasets: [
       {
         label: firstPokemon.name,
-        data: firstPokemon.stats.map(({ base_stat }) => base_stat),
+        data: firstPokemon.stats.map(({ base_stat }: baseStat[]) => base_stat),
         backgroundColor: '#008080',
         borderWidth: 3,
         hidden: false,
@@ -35,7 +48,7 @@ const StatsChart = (props) => {
       ...data.datasets,
       {
         label: secondPokemon.name,
-        data: secondPokemon.stats.map(({ base_stat }) => base_stat),
+        data: secondPokemon.stats.map(({ base_stat }: baseStat[]) => base_stat),
         backgroundColor: '#3F26BF',
         borderWidth: 3,
         hidden: !props.pokemonData.isComparing,
@@ -69,7 +82,7 @@ const StatsChart = (props) => {
   };
 
   return (
-    <div className="graph">
+    <div className=" w-80 md:w-96">
       <Bar
         id="stats_chart"
         data={data}
@@ -80,7 +93,7 @@ const StatsChart = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: RootStateOrAny) => {
   return state;
 };
 
